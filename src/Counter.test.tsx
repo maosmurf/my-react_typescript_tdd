@@ -2,38 +2,36 @@ import {shallow} from "enzyme";
 import React from "react";
 import Counter from "./Counter";
 
-it('should default render a label Count', () => {
+it('should render a counter with default label', () => {
   const wrapper = shallow(<Counter/>);
-  expect(wrapper.find('.counter label').text())
-    .toBe('Count');
+  expect(wrapper.find('.counter label').text()).toBe('Count');
 });
 
-it('should render given label', () => {
+it('should render a counter with custom label', () => {
   const wrapper = shallow(<Counter label={'Current'}/>);
-  expect(wrapper.find('.counter label').text())
-    .toBe('Current');
+  expect(wrapper.find('.counter label').text()).toBe('Current');
 });
 
-it('should default start at zero', () => {
+it('should render a counter with default count', () => {
   const wrapper = shallow(<Counter label={'Current'}/>);
   expect(wrapper.find('.counter span').text()).toBe('0');
 });
 
-it('should start at given value', () => {
-  const wrapper = shallow(<Counter label={'Current'} start={10}/>);
-  expect(wrapper.find('.counter span').text()).toBe('10');
-});
-
-it('should increment the count by one', () => {
-  const wrapper = shallow(<Counter/>);
-  expect(wrapper.find('.counter span').text()).toBe('0');
-  wrapper.find('.counter').simulate('click');
+it('should render a counter with given count', () => {
+  const wrapper = shallow(<Counter label={'Current'} count={1}/>);
   expect(wrapper.find('.counter span').text()).toBe('1');
 });
 
-it('should shift-click increment the count by ten', () => {
-  const wrapper = shallow(<Counter/>);
-  expect(wrapper.find('.counter span').text()).toBe('0');
+it('should call the handler on click', () => {
+  const handler = jest.fn();
+  const wrapper = shallow(<Counter onCounterIncrease={handler}/>);
+  wrapper.find('.counter').simulate('click');
+  expect(handler).toBeCalled();
+});
+
+it('should call the handler on click with shift key', () => {
+  const handler = jest.fn();
+  const wrapper = shallow(<Counter onCounterIncrease={handler}/>);
   wrapper.find('.counter').simulate('click', {shiftKey: true});
-  expect(wrapper.find('.counter span').text()).toBe('10');
+  expect(handler).toBeCalledWith(true);
 });

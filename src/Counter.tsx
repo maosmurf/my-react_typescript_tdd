@@ -1,42 +1,22 @@
-import React, {Component} from "react";
+import React, {FC} from "react";
 import './Counter.css';
 
 interface CounterProps {
   label?: string;
-  start?: number;
+  count?: number;
+  onCounterIncrease?: (isShift: boolean) => void;
 }
 
-interface CounterState {
-  count: number;
-}
-
-class Counter extends Component<CounterProps, CounterState> {
-
-  static defaultProps = {
-    label: 'Count',
-    start: 0
+const Counter: FC<CounterProps> = ({label = 'Count', count = 0, onCounterIncrease = () => {}}) => {
+  const handleClick = (event?: React.MouseEvent<HTMLElement>) => {
+    onCounterIncrease(!!event && event.shiftKey);
   };
-
-  constructor(props: CounterProps) {
-    super(props);
-    this.state = {
-      count: props.start!,
-    }
-  }
-
-  incCounter(event?: React.MouseEvent<HTMLElement>): void {
-    const inc = event && event.shiftKey ? 10 : 1;
-    this.setState({count: this.state.count + inc});
-  }
-
-  render() {
-    return (
-      <div className="counter" onClick={this.incCounter.bind(this)}>
-        <label>{this.props.label}</label>
-        <span>{this.state.count}</span>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="counter" onClick={handleClick}>
+      <label>{label}</label>
+      <span>{count}</span>
+    </div>
+  );
+};
 
 export default Counter;
