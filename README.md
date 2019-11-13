@@ -1,3 +1,7 @@
+# React, TypeScript, and TDD
+
+This project was based on [React, TypeScript, and TDD](https://www.jetbrains.com/pycharm/guide/tutorials/react_typescript_tdd/) webinar on jetbrains.com.  
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
