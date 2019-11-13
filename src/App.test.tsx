@@ -15,4 +15,6 @@ it('renders the app', () => {
     .toBe('Hello WORLD');
   expect(wrapper.find('.counter label').text())
     .toBe('Current');
+  expect(wrapper.find('.counter span').text())
+    .toBe('0');
 });
