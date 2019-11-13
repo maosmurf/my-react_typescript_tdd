@@ -7,8 +7,8 @@ it('generates a label', () => {
   expect(l).toBe('Hello TEST');
 });
 
-it('renders the heading with label', () => {
-  const wrapper = shallow(<Heading name='world'/>);
+it('renders the heading with default label', () => {
+  const wrapper = shallow(<Heading/>);
   expect(wrapper.find('h1').text()).toBe('Hello WORLD');
 });
 
