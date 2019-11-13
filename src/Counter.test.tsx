@@ -23,3 +23,17 @@ it('should start at given value', () => {
   const wrapper = shallow(<Counter label={'Current'} start={10}/>);
   expect(wrapper.find('.counter span').text()).toBe('10');
 });
+
+it('should increment the count by one', () => {
+  const wrapper = shallow(<Counter/>);
+  expect(wrapper.find('.counter span').text()).toBe('0');
+  wrapper.find('.counter').simulate('click');
+  expect(wrapper.find('.counter span').text()).toBe('1');
+});
+
+it('should shift-click increment the count by ten', () => {
+  const wrapper = shallow(<Counter/>);
+  expect(wrapper.find('.counter span').text()).toBe('0');
+  wrapper.find('.counter').simulate('click', {shiftKey: true});
+  expect(wrapper.find('.counter span').text()).toBe('10');
+});
