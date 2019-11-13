@@ -1,12 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App, {label} from './App';
-import {configure, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-beforeEach(() => {
-  configure({adapter: new Adapter()});
-});
+import {shallow} from 'enzyme';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
