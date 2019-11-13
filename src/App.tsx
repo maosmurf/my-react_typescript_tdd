@@ -7,7 +7,8 @@ export const label = (name: string) => {
   return `Hello ${name.toUpperCase()}`;
 };
 
-export class App extends Component<AppProps> {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+class App1 extends Component<AppProps> {
   render() {
     return (
       <div>
@@ -16,3 +17,13 @@ export class App extends Component<AppProps> {
     );
   }
 }
+
+const App: React.FC<AppProps> = (props) => {
+  return (
+    <div>
+      <h1>{label(props.name)}</h1>
+    </div>
+  );
+};
+
+export default App;
