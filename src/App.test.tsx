@@ -5,21 +5,21 @@ import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 beforeEach(() => {
-    configure({ adapter: new Adapter() });
+  configure({adapter: new Adapter()});
 });
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+  ReactDOM.render(<App name='world'/>, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it('renders the heading', () => {
-    let wrapper = shallow(<App/>);
-    expect(wrapper.find('h1').text()).toBe('Hello WORLD');
+  let wrapper = shallow(<App name='world'/>);
+  expect(wrapper.find('h1').text()).toBe('Hello WORLD');
 });
 
 it('generates a label', () => {
-   const l = label('world');
-   expect(l).toBe('Hello WORLD');
+  const l = label('test');
+  expect(l).toBe('Hello TEST');
 });
