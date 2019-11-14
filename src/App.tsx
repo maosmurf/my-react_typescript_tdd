@@ -5,10 +5,13 @@ import ActionLink from "./ActionLink";
 import NumberList from "./NumberList";
 import Greeting from './greeting/Greeting';
 import FancyBorder from "./fancy-border/FancyBorder";
+import Toolbar from "./theme/Toolbar";
+import {Theme, ThemeContext, themes} from "./theme/Themes";
 
 interface AppState {
   count: number;
   isLoggedIn: boolean;
+  theme: Theme;
 }
 
 class App extends Component<object, AppState> {
@@ -18,6 +21,7 @@ class App extends Component<object, AppState> {
     this.state = {
       count: 0,
       isLoggedIn: false,
+      theme: themes.light,
     };
   }
 
@@ -28,7 +32,16 @@ class App extends Component<object, AppState> {
 
   private toggleLogin = () => {
     this.setState(state => ({isLoggedIn: !state.isLoggedIn}));
+  };
 
+  private toggleTheme = () => {
+    console.log('this.state.theme', this.state.theme);
+    this.setState(state => ({
+      theme:
+        state.theme === themes.dark
+          ? themes.light
+          : themes.dark,
+    }));
   };
 
   render() {
@@ -42,7 +55,10 @@ class App extends Component<object, AppState> {
         onCounterIncrease={this.increment}/>
       <ActionLink onClick={this.toggleLogin}/>
       <Greeting isLoggedIn={this.state.isLoggedIn}/>
-      <NumberList numbers={[1,2,3]}/>
+      <NumberList numbers={[1, 2, 3]}/>
+      <ThemeContext.Provider value={this.state.theme}>
+        <Toolbar changeTheme={this.toggleTheme}/>
+      </ThemeContext.Provider>
     </div>;
   }
 }
