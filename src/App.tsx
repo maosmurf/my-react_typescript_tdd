@@ -4,6 +4,7 @@ import Counter from "./Counter";
 import ActionLink from "./ActionLink";
 import NumberList from "./NumberList";
 import Greeting from './greeting/Greeting';
+import FancyBorder from "./fancy-border/FancyBorder";
 
 interface AppState {
   count: number;
@@ -32,7 +33,9 @@ class App extends Component<object, AppState> {
 
   render() {
     return <div>
-      <Heading name='world'/>
+      <FancyBorder color="green">
+        <Heading name='world'/>
+      </FancyBorder>
       <Counter
         count={this.state.count}
         label={'Current'}
