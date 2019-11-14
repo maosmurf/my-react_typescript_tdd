@@ -17,7 +17,7 @@ class App extends Component<object, CounterState> {
 
   increment = (isShift: boolean) => {
     const inc: number = isShift ? 10 : 1;
-    this.setState({count: this.state.count + inc});
+    this.setState(state => ({count: state.count + inc}));
   };
 
   render() {
