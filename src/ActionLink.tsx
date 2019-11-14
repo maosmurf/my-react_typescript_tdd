@@ -1,27 +1,18 @@
 import React, {Component} from "react";
 
-interface ActionLinkState {
+interface ActionLinkProps {
   isToggleOn: boolean;
+  onClick: () => void;
 }
 
-class ActionLink extends Component<object, ActionLinkState> {
+class ActionLink extends Component<ActionLinkProps> {
 
-  constructor(props: Readonly<object>) {
-    super(props);
-    this.state = {
-      isToggleOn: false,
-    }
-  }
-
-  private handleClick = () => {
-    console.log('The link was clicked.');
-    this.setState(state => ({isToggleOn: !state.isToggleOn}));
-  };
+  static defaultProps = {isToggleOn: false};
 
   render() {
     return (
-      <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      <button onClick={this.props.onClick}>
+        {this.props.isToggleOn ? 'ON' : 'OFF'}
       </button>
     );
   }
