@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import Heading from "./Heading";
 import Counter from "./Counter";
 import ActionLink from "./ActionLink";
-import Greeting from "./Greeting";
 import NumberList from "./NumberList";
+import Greeting from './greeting/Greeting';
 
 interface AppState {
   count: number;
