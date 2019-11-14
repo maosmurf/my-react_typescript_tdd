@@ -7,14 +7,15 @@ interface ThemedButtonProps {
 
 class ThemedButton extends React.Component<ThemedButtonProps> {
   static contextType = ThemeContext;
+
   render() {
-    let props = this.props;
-    let theme = this.context;
+    let context: React.ContextType<typeof ThemeContext> = this.context;
     return (
       <button
-        {...props}
-        style={{backgroundColor: theme.background}}
-      />
+        {...this.props}
+        onClick={context.toggleTheme}
+        style={{backgroundColor: context.theme.background}}
+  />
     );
   }
 }

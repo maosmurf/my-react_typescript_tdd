@@ -6,12 +6,12 @@ import NumberList from "./NumberList";
 import Greeting from './greeting/Greeting';
 import FancyBorder from "./fancy-border/FancyBorder";
 import Toolbar from "./theme/Toolbar";
-import {Theme, ThemeContext, themes} from "./theme/Themes";
+import {IThemeContext, ThemeContext, themes} from "./theme/Themes";
 
 interface AppState {
   count: number;
   isLoggedIn: boolean;
-  theme: Theme;
+  themeContext: IThemeContext;
 }
 
 class App extends Component<object, AppState> {
@@ -21,7 +21,10 @@ class App extends Component<object, AppState> {
     this.state = {
       count: 0,
       isLoggedIn: false,
-      theme: themes.light,
+      themeContext: {
+        theme: themes.light,
+        toggleTheme: this.toggleTheme,
+      },
     };
   }
 
@@ -35,13 +38,16 @@ class App extends Component<object, AppState> {
   };
 
   private toggleTheme = () => {
-    console.log('this.state.theme', this.state.theme);
+    console.log('this.state.theme', this.state.themeContext);
+
     this.setState(state => ({
-      theme:
-        state.theme === themes.dark
-          ? themes.light
-          : themes.dark,
-    }));
+        themeContext: {
+          theme: state.themeContext.theme === themes.dark ? themes.light : themes.dark,
+          toggleTheme: state.themeContext.toggleTheme,
+        }
+      }
+    ));
+
   };
 
   render() {
@@ -56,7 +62,9 @@ class App extends Component<object, AppState> {
       <ActionLink onClick={this.toggleLogin}/>
       <Greeting isLoggedIn={this.state.isLoggedIn}/>
       <NumberList numbers={[1, 2, 3]}/>
-      <ThemeContext.Provider value={this.state.theme}>
+      <ThemeContext.Provider value={this.state.themeContext}>
+        <Toolbar changeTheme={this.toggleTheme}/>
+        <span>&#x27fa;</span>
         <Toolbar changeTheme={this.toggleTheme}/>
       </ThemeContext.Provider>
     </div>;

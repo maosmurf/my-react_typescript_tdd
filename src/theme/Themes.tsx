@@ -4,6 +4,10 @@ export interface Theme {
   foreground: string;
   background: string;
 }
+export interface IThemeContext {
+  theme: Theme,
+  toggleTheme: ( ) => void,
+}
 
 export const themes = {
   light: {
@@ -16,4 +20,7 @@ export const themes = {
   },
 };
 
-export const ThemeContext = React.createContext<Theme | undefined>(undefined);
+export const ThemeContext = React.createContext<IThemeContext>({
+  theme: themes.light,
+  toggleTheme: () => {},
+});
