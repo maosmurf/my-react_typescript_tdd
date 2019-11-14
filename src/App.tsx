@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Heading from "./Heading";
 import Counter from "./Counter";
+import ActionLink from "./ActionLink";
 
 interface CounterState {
   count: number
@@ -27,6 +28,7 @@ class App extends Component<object, CounterState> {
         count={this.state.count}
         label={'Current'}
         onCounterIncrease={this.increment}/>
+      <ActionLink/>
     </div>;
   }
 }
