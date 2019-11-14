@@ -46,3 +46,8 @@ it('updates the count by 10 via the counter component', () => {
   wrapper.find('.counter').simulate('click', {shiftKey: true});
   expect(wrapper.find('.counter span').text()).toBe('10');
 });
+
+it('should render number list with items', () => {
+  const wrapper = mount(<App/>);
+  expect(wrapper.find('ul li').length).toBe(3);
+});

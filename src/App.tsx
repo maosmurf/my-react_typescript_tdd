@@ -3,6 +3,7 @@ import Heading from "./Heading";
 import Counter from "./Counter";
 import ActionLink from "./ActionLink";
 import Greeting from "./Greeting";
+import NumberList from "./NumberList";
 
 interface AppState {
   count: number;
@@ -38,6 +39,7 @@ class App extends Component<object, AppState> {
         onCounterIncrease={this.increment}/>
       <ActionLink onClick={this.toggleLogin}/>
       <Greeting isLoggedIn={this.state.isLoggedIn}/>
+      <NumberList numbers={[1,2,3]}/>
     </div>;
   }
 }
