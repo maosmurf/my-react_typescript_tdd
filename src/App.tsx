@@ -7,6 +7,7 @@ import Greeting from './greeting/Greeting';
 import FancyBorder from "./fancy-border/FancyBorder";
 import Toolbar from "./theme/Toolbar";
 import {IThemeContext, ThemeContext, themes} from "./theme/Themes";
+import Planets from "./planets/Planets";
 
 interface AppState {
   count: number;
@@ -67,6 +68,7 @@ class App extends Component<object, AppState> {
         <span>&#x27fa;</span>
         <Toolbar changeTheme={this.toggleTheme}/>
       </ThemeContext.Provider>
+      <Planets />
     </div>;
   }
 }
