@@ -1,14 +1,14 @@
 import React from "react";
 import {RouteComponentProps} from "react-router-dom";
 
-interface MatchParams {
+interface HomeMatchParams {
   name: string;
 }
 
-interface MatchProps extends RouteComponentProps<MatchParams> {
+interface HomeProps extends RouteComponentProps<HomeMatchParams> {
 }
 
-class Home extends React.Component<MatchProps> {
+class Home extends React.Component<HomeProps> {
 
   render() {
     return <p>@ {this.props.match.url}</p>;

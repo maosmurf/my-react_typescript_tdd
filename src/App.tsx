@@ -9,6 +9,7 @@ import Toolbar from "./theme/Toolbar";
 import {IThemeContext, ThemeContext, themes} from "./theme/Themes";
 import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
 import Home from './Home';
+import Riddle from "./Riddle";
 import Planet from "./planets/Planet";
 
 interface AppState {
@@ -81,6 +82,9 @@ class App extends Component<object, AppState> {
         <Switch>
           <Route path="/planet/:id" render={(props) =>
             (<Planet {...props} />)}>
+          </Route>
+          <Route path="/riddle">
+            <Riddle riddleID={'169891'}/>
           </Route>
           <Route path="/*" render={(props) =>
             (<Home {...props} />)}>
