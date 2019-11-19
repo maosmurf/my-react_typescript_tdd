@@ -8,6 +8,8 @@ import FancyBorder from "./fancy-border/FancyBorder";
 import Toolbar from "./theme/Toolbar";
 import {IThemeContext, ThemeContext, themes} from "./theme/Themes";
 import Planets from "./planets/Planets";
+import {BrowserRouter, Link, Route} from 'react-router-dom';
+import Home from './Home';
 
 interface AppState {
   count: number;
@@ -68,7 +70,17 @@ class App extends Component<object, AppState> {
         <span>&#x27fa;</span>
         <Toolbar changeTheme={this.toggleTheme}/>
       </ThemeContext.Provider>
-      <Planets />
+      <Planets/>
+      <BrowserRouter>
+        <ul>
+          <li><Link to={"/"}>Home</Link></li>
+          <li><Link to={"/foo"}>one</Link></li>
+          <li><Link to={"/bar/baz"}>two</Link></li>
+        </ul>
+        <Route path="/*" render={(props) =>
+          (<Home {...props} />)}>
+        </Route>
+      </BrowserRouter>
     </div>;
   }
 }
