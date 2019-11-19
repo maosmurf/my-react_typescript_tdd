@@ -23,7 +23,7 @@ class Planet extends Component<PlanetProps, PlanetsState> {
     hasErrors: false,
   };
 
-    componentDidMount() {
+  componentWillMount() {
     fetch("https://swapi.co/api/planets/4/")
       .then(res => res.json())
       .then(res => this.setState({planet: res}))
