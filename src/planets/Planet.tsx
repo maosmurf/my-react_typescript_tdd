@@ -1,8 +1,16 @@
 import React, {Component} from "react";
+import {RouteComponentProps} from "react-router";
 
 interface Planet {
   name: string
 
+}
+
+interface PlanetMatchParams {
+  name: string;
+}
+
+interface PlanetProps extends RouteComponentProps<PlanetMatchParams> {
 }
 
 interface PlanetsState {
@@ -10,7 +18,7 @@ interface PlanetsState {
   planet?: Planet;
 }
 
-class Planets extends Component<object, PlanetsState> {
+class Planet extends Component<PlanetProps, PlanetsState> {
   state: PlanetsState = {
     hasErrors: false,
   };
@@ -29,4 +37,4 @@ class Planets extends Component<object, PlanetsState> {
   }
 }
 
-export default Planets;
+export default Planet;

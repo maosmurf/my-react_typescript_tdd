@@ -7,9 +7,9 @@ import Greeting from './greeting/Greeting';
 import FancyBorder from "./fancy-border/FancyBorder";
 import Toolbar from "./theme/Toolbar";
 import {IThemeContext, ThemeContext, themes} from "./theme/Themes";
-import Planets from "./planets/Planets";
-import {BrowserRouter, Link, Route} from 'react-router-dom';
+import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
 import Home from './Home';
+import Planet from "./planets/Planet";
 
 interface AppState {
   count: number;
@@ -70,16 +70,22 @@ class App extends Component<object, AppState> {
         <span>&#x27fa;</span>
         <Toolbar changeTheme={this.toggleTheme}/>
       </ThemeContext.Provider>
-      <Planets/>
       <BrowserRouter>
         <ul>
           <li><Link to={"/"}>Home</Link></li>
+          <li><Link to={"/riddle"}>riddle</Link></li>
           <li><Link to={"/foo"}>one</Link></li>
           <li><Link to={"/bar/baz"}>two</Link></li>
+          <li><Link to={"/planet/4"}>planet 4</Link></li>
         </ul>
-        <Route path="/*" render={(props) =>
-          (<Home {...props} />)}>
-        </Route>
+        <Switch>
+          <Route path="/planet/:id" render={(props) =>
+            (<Planet {...props} />)}>
+          </Route>
+          <Route path="/*" render={(props) =>
+            (<Home {...props} />)}>
+          </Route>
+        </Switch>
       </BrowserRouter>
     </div>;
   }
