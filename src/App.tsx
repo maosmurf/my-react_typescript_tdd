@@ -55,33 +55,40 @@ class App extends Component<object, AppState> {
   };
 
   render() {
+    const navItems = [
+      '/',
+      '/riddle',
+      '/foo',
+      '/planet/3',
+      '/planet/4',
+    ].map((target) =>
+      <li key={target} style={{display: "inline-block", margin: '1em'}}><Link
+        to={target}>{target}</Link></li>
+    );
+
     return <div>
-      <FancyBorder color="green">
-        <Heading name='world'/>
-      </FancyBorder>
-      <Counter
-        count={this.state.count}
-        label={'Current'}
-        onCounterIncrease={this.increment}/>
-      <ActionLink onClick={this.toggleLogin}/>
-      <Greeting isLoggedIn={this.state.isLoggedIn}/>
-      <NumberList numbers={[1, 2, 3]}/>
-      <ThemeContext.Provider value={this.state.themeContext}>
-        <Toolbar changeTheme={this.toggleTheme}/>
-        <span>&#x27fa;</span>
-        <Toolbar changeTheme={this.toggleTheme}/>
-      </ThemeContext.Provider>
       <BrowserRouter>
-        <ul>
-          <li><Link to={"/"}>Home</Link></li>
-          <li><Link to={"/riddle"}>riddle</Link></li>
-          <li><Link to={"/foo"}>one</Link></li>
-          <li><Link to={"/bar/baz"}>two</Link></li>
-          <li><Link to={"/planet/4"}>planet 4</Link></li>
-        </ul>
+        <FancyBorder color="green">
+          <Heading name='world'/>
+        </FancyBorder>
+        <ul>{navItems}</ul>
+        <Counter
+          count={this.state.count}
+          label={'Current'}
+          onCounterIncrease={this.increment}/>
+        <ActionLink onClick={this.toggleLogin}/>
+        <Greeting isLoggedIn={this.state.isLoggedIn}/>
+        <NumberList numbers={[1, 2, 3]}/>
+        <ThemeContext.Provider value={this.state.themeContext}>
+          <Toolbar changeTheme={this.toggleTheme}/>
+          <span>&#x27fa;</span>
+          <Toolbar changeTheme={this.toggleTheme}/>
+        </ThemeContext.Provider>
         <Switch>
-          <Route path="/planet/:id" render={(props) =>
-            (<Planet {...props} />)}>
+          <Route path="/planet/:id" render={(props) => {
+
+            return <Planet {...props} />;
+            }}>
           </Route>
           <Route path="/riddle">
             <Riddle riddleID={'169891'}/>
