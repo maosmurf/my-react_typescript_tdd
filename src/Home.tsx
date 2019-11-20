@@ -1,18 +1,28 @@
 import React from "react";
-import {RouteComponentProps} from "react-router-dom";
+import useFetch from 'fetch-suspense';
 
-interface HomeMatchParams {
-  name: string;
+interface HomeProps {
+  url: string;
 }
 
-interface HomeProps extends RouteComponentProps<HomeMatchParams> {
+interface Route {
+  layout: {
+    [key: string]: {
+      type: string
+    }[]
+  };
 }
 
 class Home extends React.Component<HomeProps> {
 
   render() {
-    return <p>@ {this.props.match.url}</p>;
+    const uri = this.props.url.replace(/\/$/, "");
+    const url = `https://efs.kurier.at/api/v1/cfs/route?uri=/kurierat${uri}`;
+    let TEN_SECONDS = 10000;
+    const response: Route = useFetch(url, undefined, {lifespan: TEN_SECONDS}) as Route;
+    return <p>@ {response.layout.center.length}</p>;
   }
+
 }
 
 export default Home;

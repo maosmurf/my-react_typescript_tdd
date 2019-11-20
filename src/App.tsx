@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, lazy, Suspense} from 'react';
 import Heading from "./Heading";
 import Counter from "./Counter";
 import ActionLink from "./ActionLink";
@@ -8,9 +8,8 @@ import FancyBorder from "./fancy-border/FancyBorder";
 import Toolbar from "./theme/Toolbar";
 import {IThemeContext, ThemeContext, themes} from "./theme/Themes";
 import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
-import Home from './Home';
 import Riddle from "./Riddle";
-import Planet from "./planets/Planet";
+import PlanetComp from "./planets/PlanetComp";
 
 interface AppState {
   count: number;
@@ -55,10 +54,13 @@ class App extends Component<object, AppState> {
   };
 
   render() {
+
+    const Home = lazy(() => import('./Home'));
+
     const navItems = [
       '/',
       '/riddle',
-      '/foo',
+      '/politik',
       '/planet/3',
       '/planet/4',
     ].map((target) =>
@@ -86,15 +88,17 @@ class App extends Component<object, AppState> {
         </ThemeContext.Provider>
         <Switch>
           <Route path="/planet/:id" render={(props) => {
-
-            return <Planet {...props} />;
-            }}>
+            return <PlanetComp planetId={props.match.params.id} />;
+          }}>
           </Route>
           <Route path="/riddle">
             <Riddle riddleID={'169891'}/>
           </Route>
           <Route path="/*" render={(props) =>
-            (<Home {...props} />)}>
+            <Suspense fallback={<h3>...</h3>}>
+              <Home url={props.match.url}/>
+            </Suspense>
+          }>
           </Route>
         </Switch>
       </BrowserRouter>
